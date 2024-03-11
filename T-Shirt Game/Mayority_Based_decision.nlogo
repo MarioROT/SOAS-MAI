@@ -169,41 +169,15 @@ NIL
 VERTICAL
 
 @#$#@#$#@
-## WHAT IS IT?
+- *Simple Majority Strategy*
 
-(a general understanding of what the model is trying to show or explain)
+At first I implemented the system to have pairs and interchange color information and based on the last t-shirt seen decide which t-shirt to wear, but I didn´t get interesting results so I changed it to the final presented version where an agent looks around it and based on the majority decides which t-shirt to wear in the next round.
 
-## HOW IT WORKS
+This strategy has a straightforward decision-making process where agents choose their state based on the most common state observed in their immediate environment. Each player observes the T-shirt colors of nearby players within a certain radius and then adopts the color worn by the majority. This strategy sucessfully demostrated the a social norm generation and reflect global patterns or consensus without centralized control. Each round of observations and decisions gradually led the entire group to converge on a single color. Showing how simple rules can lead to complex behaviors.
 
-(what rules the agents use to create the overall behavior of the model)
+An important aspect of this strategy is the observation range, which determines how many other players an agent considers when deciding its next action. Adjusting the observation range can significantly affect the speed and likelihood of achieving convergence. A too-small range (tested with a value of 3) might limit the information available for making decisions, slowing down the process of reaching a consensus. On the other hand, too large an area of distribution could make local variations in color distribution less influential, possibly leading to a deadlock if the population is equally divided. 
 
-## HOW TO USE IT
-
-(how to use the model, including a description of each of the items in the Interface tab)
-
-## THINGS TO NOTICE
-
-(suggested things for the user to notice while running the model)
-
-## THINGS TO TRY
-
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
-
-## EXTENDING THE MODEL
-
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
-
-## NETLOGO FEATURES
-
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
-
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
-
-## CREDITS AND REFERENCES
-
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+Using the value of five observable players in each round after many iterations, convergence was reached at iteration 55 on average.
 @#$#@#$#@
 default
 true
