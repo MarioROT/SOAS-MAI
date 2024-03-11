@@ -1,0 +1,11 @@
+Mario Rosas | SOAS | UB
+
+Your T-shirt game strategy
+
+My strategy was, If in the last round we disagree in the color I move to my last pair t-shirt color, else If we matched I keep it.
+
+For round in rounds:
+   if shirt_comparison_round_r-1 = 'no match':
+	t_shirt_color = pair_r-1-tshirt_color
+   else:
+        t_shirt_color = t_shirt_color
