@@ -1,0 +1,105 @@
+ b { color: #00B7EB ; } 
+ i { color: #CD5B45 ; } 
+
+.fragment.blur {
+    filter: blur(5px);
+  }
+
+  .fragment.blur.visible {
+    filter: none;
+  }
+
+ .fragment.unblur {
+    filter: none;
+  }
+
+  .fragment.unblur.visible {
+    filter: blur(5px);
+  }
+
+  .items {
+    font-size: 20px;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bullets1 {
+    flex: 1;
+    padding-right: 20px;
+    /* Adjust the spacing between bullets and image as needed */
+  }
+
+  .image1 {
+    flex: 1;
+    text-align: right;
+  }
+
+  .bullets2 {
+    flex: 1;
+    padding-right: 20px;
+    /* Adjust the spacing between bullets and image as needed */
+  }
+
+  .image2 {
+    flex: 1;
+    text-align: left;
+  }
+
+  .left {
+    float: left;
+    width: 50%;
+    /* Adjust width as needed */
+  }
+
+  .right {
+    float: right;
+    width: 50%;
+    /* Adjust width as needed */
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  table {
+    /* Adjust table width as needed */
+    border-collapse: collapse;
+    font-size: 20px;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+
+  }
+
+
+  th.column1 {
+    width: 20%;
+    /* Set the width of the first column */
+  }
+
+  th.column2 {
+    width: 30%;
+    /* Set the width of the second column */
+  }
+
+  /* Apply the same widths to corresponding table data cells */
+  td.column1,
+  th.column1 {
+    width: 20%;
+  }
+
+  td.column2,
+  th.column2 {
+    width: 30%;
+  }

@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- ------------- Cover ------------------ -->
+      <section data-transition="zoom">
+        <h2 class="fragment" style="color: #79b6c9;">EVOLVING INTRINSIC MOTIVATIONS FOR ALTRUISTIC BEHAVIOR</h1>
+          <h4 class="fragment">Jane X. | Edward H. | Chrisantha F. | Wojchiech M . | Edgar A. | Joel Z.</h3>
+            <h4 class="fragment">DeepMind</h4>
+            <p class="fragment" style="font-size: 20px;">Self-Organising Agent Systems - Master in Artificial
+              Intelligence - Mario R. O.</p>
+      </section>
+
+      <!-- ------------- Slide 1 ------------------ -->
+      <section>
+        <div class="content">
+          <div class="left">
+            <h2>Paper Introduction</h2>
+            <ul>
+              <li class="fragment fade-up items" align="justify"><b>Importance of Cooperation</b>: Working together
+                towards a common goal, which is essential for achieving complex tasks and surviving in social and
+                environmental challenges.</li>
+              <li class="fragment fade-up items" align="justify"><b>Intertemporal Social Dilemmas</b>: Situations where
+                individuals must choose between immediate personal benefits and long-term collective well-being,
+                highlighting the conflict between selfish actions and altruistic outcomes over time.</li>
+              <li class="fragment fade-up items" align="justify"><b>Evolution and Reinforcement Learning</b>: A process
+                combining natural selection principles and learning strategies to adaptively improve behaviors or
+                strategies based on feedback from the environment, aimed at achieving better outcomes over generations.
+              </li>
+            </ul>
+          </div>
+          <div class="right">
+            <img src="./assets/F1_3.png" alt="Italian Trulli">
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------- Slide 2 ------------------ -->
+      <section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/AgentForm2.png" alt="Italian Trulli">
+              <!-- <p>Source: Dedale project (https://dedale.gitlab.io/page/dedale/presentation/)</p> -->
+            </div>
+            <div class="right">
+              <h4>Reward and Adaptation Methods</h4>
+              <ul>
+                <li class="fragment highlight-blue items" align="justify" style="font-weight: bold;">Rewards</li>
+                <ul>
+                  <li class="items" align="justify"><b>Extrinsic Reward </b>: \(r_i^E \left(s_{i},a_i\right)\) feedback
+                    given by the environment for actions taken, reflecting immediate, tangible benefits.</li>
+                  <li class="items" align="justify"><b>Intrinsic Reward</b>: \(u(f)\) Additional rewards based on social
+                    features or the collective welfare, to promote cooperative behaviors.</li>
+                  <li class="items" align="justify"><b>Total Reward</b>: The combination of extrinsic and intrinsic
+                    rewards, guiding overall agent behavior. \(r_i\left(s_{i},a_i\right)= r_i^E \left(s_{i},a_i\right) +
+                    u_i\left(f_i\right)\)</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/AgentForm2.png" alt="Italian Trulli">
+              <!-- <p>Source: Dedale project (https://dedale.gitlab.io/page/dedale/presentation/)</p> -->
+            </div>
+            <div class="right">
+              <h4>Reward and Adaptation Methods</h4>
+              <ul>
+                <li class="fragment highlight-blue items" align="justify" style="font-weight: bold;">Auxiliar concepts
+                </li>
+                <ul>
+                  <li class="items" align="justify"><b>Feature vector \(f\)</b>: A set of characteristics observed or
+                    experienced derived from all players, used to compute the intrinsic reward via a neural network.
+                  </li>
+                  <li class="items" align="justify"><b>Prospective Method</b>: Intrinsic rewards are calculated based on
+                    expectations of future rewards, aiming to influence immediate decisions for long-term benefits.</li>
+                  <li class="items" align="justify"><b>Retrospective Method</b>: Intrinsic rewards are based on past
+                    actions' outcomes, focusing on historically received rewards, to encourage behaviors beneficial in
+                    similar future contexts.</li>
+                  <li class="items" align="justify"><b>Evolutionary Approach</b>: Over time, the weightings within the
+                    intrinsic reward function evolve, optimizing the balance between extrinsic and intrinsic rewards to
+                    foster cooperative strategies.</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ------------- Slide 1 ------------------ -->
+      <section>
+        <h2>Architecture: Building the agents</h2>
+        <p>The agents are built using a deep reinforcement learning framework, each agent has:</p>
+        <ul>
+          <li class="items" align="justify"><b>Policy Network</b>: A neural network module which decides what actions to
+            take based on what the agent sees in its environment.</li>
+          <li class="items" align="justify"><b>Reward Network</b>: this network modifies the rewards the agent receives
+            for certain actions, based on social factors.</li>
+        </ul>
+
+      </section>
+
+      <!-- ------------- Slide 1 ------------------ -->
+      <section>
+        <h2>Evolutionary Dynamics</h2>
+        <div class="left">
+          <ul>
+            <br>
+            <li class="items" align="justify"><b>Random vs Assortative Matchmaking</b>: Agents can be matched in two
+              different ways: uniformly at random or based on their level of cooperativeness.</li><br>
+            <li class="items" align="justify"><b>Shared vs. Individual Reward Networks</b>: Two strategies for the
+              reward
+              network are tested, all agents in a game share a single reward network or each agent evolves its reward
+              network.</li>
+          </ul>
+        </div>
+        <div class="right">
+          <img src="./assets/AgentMatch.png" alt="Italian Trulli">
+        </div>
+
+
+      </section>
+
+      <section>
+        <h3>Training: teaching agents to cooperate</h3>
+        <ul>
+          <li class="fragment fade-right items" align="justify"><b>Multi-Agent Reinforcement Learning</b>:Agents learn
+            by doing. They take actions in the environment and learn based on the rewards or penalties they receive. The
+            goal is to maximize their cumulative reward over time.</li>
+          <li class="fragment fade-right items" align="justify"><b>Evolutionary Strategy</b>:Agents are periodically
+            evaluated, and their reward network's parameters are subject to evolution.
+            <ul>
+              <li class="items" align="justify">The best-performing agents (higher rewards) are more likely to reproduce
+                passing their characteristics to the next generation.</li>
+              <li class="items" align="justify">Over generations, agents with reward networks that lead to beneficial
+                cooperative behavior become more common.</li>
+          </li>
+          </li>
+        </ul>
+        <li class="fragment fade-right items" align="justify"><b>Intertemporal Social Dilemmas (ISDs)</b>:The
+          environments for training, designed to mimic situations where cooperation is challenging but essential for
+          long-term success. Agents need to learn not just how to maximize immediate rewards but to cooperate for
+          greater future benefits.</li>
+        <li class="fragment fade-right items" align="justify"><b>Intrinsic Motivations</b>: The reward network is
+          tweaked not just by direct outcomes but by intrinsic motivations (internal goals) that encourage behaviors
+          beneficial to the group, even if they're not immediately rewarding for the individual.</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="content">
+          <div class="left">
+            <ul>
+              <li class="fragment items custom blur" align="justify" style="font-weight: bold;"><b>Cleanup Game</b>
+                <ul>
+                  <li class="items" align="justify">Agents must cooperate to clean a polluted aquifer to ensure the
+                    continuous growth of apples. The dilemma arises when individuals must decide whether to clean
+                    (contributing to the common good) or collect apples (personal gain), with the collective outcome
+                    heavily dependent on group cooperation.</li>
+                </ul>
+              </li>
+              <li class="fragment items custom blur" align="justify" style="font-weight: bold;"><b>Harvest Game</b>
+                <ul>
+                  <li class="items" align="justify">The challenge is to collect apples without depleting them. The
+                    social dilemma surfaces as agents must balance the temptation to harvest apples rapidly (for
+                    immediate reward) against the sustainable management of resources, ensuring long-term availability
+                    for all.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="right">
+            <img src="./assets/Games.png" alt="Italian Trulli">
+            <h2>Experiment Environments</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------- Slide 2 ------------------ -->
+      <section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/Res.png" alt="Italian Trulli">
+              <!-- <p>Source: Dedale project (https://dedale.gitlab.io/page/dedale/presentation/)</p> -->
+            </div>
+            <div class="right">
+              <ul>
+                <li class="fragment fade-right items" align="justify"><i>(Baseline) Without</i> using <i>intrinsic
+                    reward network</i>
+                  performs <i>poorly</i> on both games.</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Random Matchmaking</i> + <i>Individual
+                    Retrospective Reward
+                    Network</i>, no better than PBT at Cleanup and moderately better at Harvest</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Assortative Matchmaking</i> + <i>No
+                    Reward Network</i>,
+                  performance is same as baseline.</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Assortative Matchmaking</i> +
+                  <i>Individual Retrospective
+                    Reward Network</i>, performance is very high.
+                </li>
+                <li class="fragment fade-right items" align="justify">Using <i>Random Matchmaking</i> + <i>Shared
+                    Retrospective Reward
+                    Network</i> performs as well as AM+IRRN in Harvest, and slightly better for Cleanup.</li>
+              </ul>
+            </div>
+          </div>
+          <h3>Results: Random vs. Assortative Matchmaking</h3>
+        </section>
+        <section>
+          <h3>Results: Prospective vs Retrospective Reward Network</h3>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/Res.png" alt="Italian Trulli">
+              <!-- <p>Source: Dedale project (https://dedale.gitlab.io/page/dedale/presentation/)</p> -->
+            </div>
+            <div class="right">
+              <ul>
+                <li class="fragment fade-right items" align="justify">Using <i>Individual Prospectivepective Reward
+                    Network</i>, performance is slightly worse than baseline for both games.</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Individual Retrospective Reward
+                    Network</i>, no better than baseline at Cleanup and moderately better at Harvest</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Shared Prospective Reward Network</i>,
+                  although better than baseline, generally results in worse performance and more inestability.</li>
+                <li class="fragment fade-right items" align="justify">Using <i>Shared Prospective Reward Network</i>,
+                  better performance and more estability.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/ResSoc.png" alt="Italian Trulli">
+            </div>
+            <div class="right">
+              <ul>
+                <li class="fragment custom blur items" align="justify"><b>In Harvest:</b>
+                  <ul>
+                    <li class="items" align="justify"><i>Prospectivepective RN</i> leads to a <i>lower equality</i>,
+                      <i>Restrospective RN</i> tends to very <i>high equality</i>.</li>
+                    <li class="items" align="justify"><i>Higher propensity for tagging</i> when using either a
+                      <i>Prospective RN</i> or an <i>Individual RN</i>, than when using a <i>Retrospective Shared
+                        RN</i>.</li>
+                    <li class="items" align="justify">Having <i>No RN</i> results in players collecting apples extremely
+                      quickly, compared with much more sustainable behavior <i>With RN</i>.</li>
+                  </ul>
+                </li>
+                <li class="fragment custom blur items" align="justify"><b>In Cleanup:</b>
+                  <ul>
+                    <li class="items" align="justify">Tends to a <i>unstable and low overall equality</i> even when
+                      performance is high.</li>
+                    <li class="items" align="justify">The use of <i>tagging</i> by agents is <i>overall much more
+                        lower</i> than in Harvest.</li>
+                    <li class="items" align="justify">No meaningful were obtained for <i>Sustainability</i>.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h3>Results: Social Outcome Metrics</h3>
+        </section>
+      </section>
+
+
+      <section>
+        <h3>Conclusions</h3>
+        <ul>
+          <li class="fragment fade-right items" align="justify">As stated by the <i>evolutionary theory</i>, only via
+            natural selection does not leads to the emergence of cooperation.</li>
+          <li class="fragment fade-right items" align="justify"><i>Assortative Matchmaking</i> is sufficient to generate
+            cooperative behavior where signals of reward (intrinsic reward) are available.</li>
+          <li class="fragment fade-right items" align="justify">The proposed <i>multi-level evolutionary paradigm</i>
+            achieve cooperation in more general situations.</li>
+          <li class="fragment fade-right items" align="justify"><i>Evolution</i> bridges the gap between individual
+            learning and long-term group benefits, <i>enhancing cooperation</i> by revealing social signals related to
+            selfish behavior, that contributes to the <i>resolution of the intertemporal social dilemmas</i>. In accord,
+            laboratory experiments show that humans cooperate more readily when they can communicate.</li>
+        </ul>
+      </section>
+
+
+      <script src="dist/reveal.js"></script>
+      <script src="plugin/notes/notes.js"></script>
+      <script src="plugin/markdown/markdown.js"></script>
+      <script src="plugin/highlight/highlight.js"></script>
+      <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+          hash: true,
+
+          // Learn about plugins: https://revealjs.com/plugins/
+          plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+      </script>
+</body>
+
+</html>
