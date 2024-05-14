@@ -60,6 +60,18 @@
     /* Adjust width as needed */
   }
 
+  .left-cover {
+    float: left;
+    width: 60%;
+    /* Adjust width as needed */
+  }
+
+  .right-cover {
+    float: right;
+    width: 40%;
+    /* Adjust width as needed */
+  }
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
@@ -103,3 +115,27 @@
   th.column2 {
     width: 30%;
   }
+
+  .pulse-effect {
+    color: #00c2cb;
+    text-shadow: 0px 0px 10px #1885a1, 0px 0px 20px #fff;
+    animation: pulse 2s infinite;
+  }
+
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}

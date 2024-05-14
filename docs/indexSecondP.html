@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- ------------- Cover ------------------ -->
+      <section data-transition="zoom">
+        <h2 class="fragment" style="color: #79b6c9;">EVOLVING INTRINSIC MOTIVATIONS FOR ALTRUISTIC BEHAVIOR</h1>
+          <h4 class="fragment">Experiments & Implementation Plan</h3>
+            <!-- <h4 class="fragment">Self-Organising Agent Systems</h4> -->
+            <p class="fragment" style="font-size: 20px;">Self-Organising Agent Systems - Master in Artificial
+              Intelligence - Mario R. O.</p>
+      </section>
+
+      <!-- ------------- Slide 1 ------------------ -->
+      <section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <h2>In a nutshell</h2>
+              <ul>
+                <li class="fragment fade-up items" align="justify"><b>Main Concept.</b> using multi-agent reinforcement
+                  learning (MARL) combined with evolutionary strategies to promote cooperative behavior among
+                  self-interested agents in intertemporal social dilemmas (ISDs)</li>
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <img src="./assets/F1_3.png" alt="Italian Trulli">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="content">
+            <div class="left">
+              <h2>In a nutshell</h2>
+              <ul>
+                <li class="items" align="justify"><b>Main Concept.</b> using multi-agent reinforcement
+                  learning (MARL) combined with evolutionary strategies to promote cooperative behavior among
+                  self-interested agents in intertemporal social dilemmas (ISDs)</li>
+                <li class="items" align="justify"><b>\(TotRwd = ExtRwd + IntRwd\).</b> Reward computed
+                  by considering Environment Feedback \(+\) Collective Welfare Features.</li>
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <img src="./assets/AgentForm2.png" alt="Italian Trulli">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="content">
+            <div class="left">
+              <h2>In a nutshell</h2>
+              <ul>
+                <li class="items" align="justify"><b>Main Concept.</b> using multi-agent reinforcement
+                  learning (MARL) combined with evolutionary strategies to promote cooperative behavior among
+                  self-interested agents in intertemporal social dilemmas (ISDs)</li>
+                <li class="items" align="justify"><b>\(TotRwd = ExtRwd + IntRwd\).</b> Reward computed
+                  by considering Environment Feedback \(+\) Collective Welfare Features.</li>
+                <li class="items" align="justify"><b>Training process.</b>: a system composed of a
+                  MARL, Evolutionary Strategies and solve Intertemporal Social Dilemmas by using Intrinsic Motivations.
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <br>
+          <img src="./assets/AgentMatch.png" alt="Italian Trulli">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="content">
+            <div class="left">
+              <h2>In a nutshell</h2>
+              <ul>
+                <li class="items" align="justify"><b>Main Concept.</b> using multi-agent reinforcement
+                  learning (MARL) combined with evolutionary strategies to promote cooperative behavior among
+                  self-interested agents in intertemporal social dilemmas (ISDs)</li>
+                <li class="items" align="justify"><b>\(TotRwd = ExtRwd + IntRwd\).</b> Reward computed
+                  by considering Environment Feedback \(+\) Collective Welfare Features.</li>
+                <li class="items" align="justify"><b>Training process.</b>: a system composed of a
+                  MARL, Evolutionary Strategies and solve Intertemporal Social Dilemmas by using Intrinsic Motivations.
+                <li class="items" align="justify"><b>Environments.</b>: Cleanup and Harvest games.
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <br>
+              <br>
+            <img src="./assets/Games.png" alt="Italian Trulli">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="content">
+            <div class="left">
+              <h2>In a nutshell</h2>
+              <ul>
+                <li class="items" align="justify"><b>Main Concept.</b> using multi-agent reinforcement
+                  learning (MARL) combined with evolutionary strategies to promote cooperative behavior among
+                  self-interested agents in intertemporal social dilemmas (ISDs)</li>
+                <li class="items" align="justify"><b>\(TotRwd = ExtRwd + IntRwd\).</b> Reward computed
+                  by considering Environment Feedback \(+\) Collective Welfare Features.</li>
+                <li class="items" align="justify"><b>Training process.</b>: a system composed of a
+                  MARL, Evolutionary Strategies and solve Intertemporal Social Dilemmas by using Intrinsic Motivations.
+                <li class="items" align="justify"><b>Environments.</b>: Cleanup and Harvest games.
+                <li class="items" align="justify"><b>Experiments.</b>: Random vs Assortative Matching
+                  Restrospective vs Prospective Reward Calculation, Shared vs Individual Reward Network.
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <br>
+              <br>
+              <img src="./assets/Res.png" alt="Italian Trulli">
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ------------- Slide 2 ------------------ -->
+      <section>
+        <section>
+          <div class="content">
+            <div class="left">
+              <img src="./assets/AgentForm2.png" alt="Italian Trulli">
+              <!-- <p>Source: Dedale project (https://dedale.gitlab.io/page/dedale/presentation/)</p> -->
+            </div>
+            <div class="right">
+              <h2>System Design</h2>
+              <ul>
+                <ul>
+                  <li class="fragment fade-up items" align="justify"><b>Agent Design </b> Policy (actions) and Reward (rewards) Networks connected either to individual or collective outcomes.</li>
+                  <li class="fragment fade-up items" align="justify"><b>Reward Function.</b>Intrinsinc Reward Function (FCN) and Extrinsic Reward Function (environment feedback)</li>
+                  <li class="fragment fade-up items" align="justify"><b>Environement.</b> <i>Clean Up Game</i> (If time: Harvest Game)</li>
+                  <li class="fragment fade-up items" align="justify"><b>Evolutionary Dinamics.</b> Experiment mainly with the shared retrospective network reward, either with random or assortative matching.</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ------------- Slide 3 ------------------ -->
+      <section>
+        <h2>Experiments</h2>
+        <p>Objective: Validate that the system can evolve cooperation among agents and evaluate metrics sustainability.</p>
+        <ul>
+          <li class="items" align="justify"><b>Experimental Setup</b></li>  
+<ul class="fragment fade-right">
+          <li class="items" align="justify">Initialization of policy and reward network parameters and evolutionary.</li>  
+          <li class="items" align="justify">Learning parameters (mutation rates, selection process, learning rates, etc.)</li>  
+        </ul>
+<li class="items" align="justify"><b>Experimental conditions</b></li>  
+<ul class="fragment fade-right">
+          <li class="items" align="justify">Shared Retrospective Reward Network + <i>Random Matchmaking</i></li>  
+          <li class="items" align="justify">Shared Retrospective Reward Network + <i>Assortative Matchmaking</i></li>  
+        </ul>
+ <li class="items" align="justify"><b>Performance Evaluation</b></li>  
+<ul class="fragment fade-right">
+          <li class="items" align="justify"><i>Group Performance.</i> Total collected rewards by all agents.</li>  
+          <li class="items" align="justify"><i>Cooperation vs Defection</i> rates in tasks.</li>  
+          <li class="items" align="justify"><i>Long-term sustainability</i> performance.</li>  
+        </ul>         
+        </ul>
+
+      </section>
+
+      <!-- ------------- Slide 4 ------------------ -->
+      <section data-transition="zoom">
+        <h2>Implementation Resources</h2>
+        <div class="left">
+          <ul>
+            <br>
+            <li class="fragment fade-down items" align="justify"><b>Sequential Social Dilemma Games.</b> Repository by Eugene Vinitsky already implementing the environments.</li><br>
+            <li class="fragment fade-down items" align="justify"><b>Tools and Libraries.</b> Python  + OpenAI Gym.</li><br>
+            <li class="fragment fade-down items" align="justify"><b>Plan B.</b>Implement Intrinsic Motivations Evolution using manual configurations of social norms and observe how altruistic behaviours change over time.</li>
+          </ul>
+        </div>
+        <div class="right">
+          <img src="./assets/RepoGit.png" alt="Italian Trulli">
+        </div>
+
+
+      </section>
+
+      <section>
+        <h2 style="color: #79b6c9;">EVOLVING INTRINSIC MOTIVATIONS FOR ALTRUISTIC BEHAVIOR</h1>
+          <h4>Experiments & Implementation Plan</h3>
+            <!-- <h4 class="fragment">Self-Organising Agent Systems</h4> -->
+            <p style="font-size: 20px;">Self-Organising Agent Systems - Master in Artificial
+              Intelligence - Mario R. O.</p>
+      </section>
+
+
+      <script src="dist/reveal.js"></script>
+      <script src="plugin/notes/notes.js"></script>
+      <script src="plugin/markdown/markdown.js"></script>
+      <script src="plugin/highlight/highlight.js"></script>
+      <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+          hash: true,
+
+          // Learn about plugins: https://revealjs.com/plugins/
+          plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+      </script>
+</body>
+
+</html>
