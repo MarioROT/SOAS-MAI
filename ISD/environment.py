@@ -189,7 +189,7 @@ class CleanupEnv(gym.Env):
             pygame.draw.rect(self.screen, colors[idx], pygame.Rect(y * 20, x * 20, 20, 20))
         
         pygame.display.flip()
-        self.clock.tick(20)  # Limit the frame rate to 10 FPS
+        self.clock.tick(21)  # Limit the frame rate to 10 FPS
 
     def close(self):
         pygame.quit()
