@@ -12,6 +12,7 @@ class CleanupEnvWithAgent(CleanupEnv):
         self.agent = AgentNetwork((3, 15, 15), 8)
         self.hx = torch.zeros(1, 128)  # Initial hidden state of LSTM
         self.cx = torch.zeros(1, 128)  # Initial cell state of LSTM
+        self.decayed_rewards = [0] * len(self.agents)
 
     def step(self, actions):
         rewards = []
@@ -42,6 +43,10 @@ class CleanupEnvWithAgent(CleanupEnv):
 
             agent['reward'] += reward
             rewards.append(reward)
+
+        # Update decayed rewards
+        for i in range(len(self.agents)):
+            self.decayed_rewards[i] = 0.975 * self.decayed_rewards[i] + rewards[i]
         
         # Check if agents are in apple field and collect apples
         for agent in self.agents:
@@ -69,6 +74,7 @@ class CleanupEnvWithAgent(CleanupEnv):
         # Ensure observation has 3 channels
         if len(observation.shape) == 2:
             observation = np.stack((observation,)*3, axis=-1)
+            # observation = np.stack((observation,), axis=-1)
         observation = observation.transpose((2, 0, 1))  # Convert to (C, H, W) format
 
         observation = torch.tensor(observation, dtype=torch.float32).unsqueeze(0)
@@ -116,6 +122,13 @@ for episode in range(num_episodes):
             actions.append(action)
         
         observations, rewards, done, info = env.step(actions)
+        
+        reward_log = f""
+        for i, reward in enumerate(rewards):
+            reward_log += f"| A[{i}]={reward} "
+
+        print(reward_log)
+
         
         total_rewards = [total_rewards[i] + rewards[i] for i in range(len(rewards))]
         last_action = actions
