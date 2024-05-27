@@ -1,22 +1,27 @@
+
 import gym
 from gym import spaces
 import numpy as np
 import pygame
 
 class CleanupEnv(gym.Env):
-    def __init__(self):
+    def __init__(self, spawn_waste_rate = None):
         super(CleanupEnv, self).__init__()
-        self.action_space = spaces.Discrete(6)  # left, right, up, down, rotate, clean
+        self.action_space = spaces.Discrete(7)  # left, right, up, down, rotate left, rotate right, clean
         self.observation_space = spaces.Box(low=0, high=255, shape=(15, 15, 3), dtype=np.uint8)
         
         # Define the grid size
-        self.grid_size = (25, 18)
+        self.grid_size = (18, 25)
+        
+        # Define the aquifer region (where waste affects apple spawning)
+        self.aquifer_region = [(i, j) for i in range(5) for j in range(self.grid_size[1])]
         
         # Initialize the grid, agents, apples, and waste
         self.grid = np.zeros(self.grid_size)
         self.agents = [{'pos': (0, 0), 'direction': 0} for _ in range(5)]  # Example initial positions
         self.apples = set()
         self.waste = set()
+        self.spawn_waste_rate = spawn_waste_rate
         
         self.reset()
 
@@ -39,15 +44,14 @@ class CleanupEnv(gym.Env):
         self.apples = set()
         self.waste = set()
         
-        # Randomly place initial apples
-        for _ in range(10):
-            x, y = np.random.randint(self.grid_size[0]), np.random.randint(self.grid_size[1])
-            self.apples.add((x, y))
-            self.grid[x, y] = 1  # Represent apples with 1
+        # No initial apples (as per the description)
         
-        # Randomly place initial waste
-        for _ in range(5):
-            x, y = np.random.randint(self.grid_size[0]), np.random.randint(self.grid_size[1])
+        # Randomly place initial waste in the aquifer region, 70% to 90% dirty
+        # num_initial_waste = int(np.random.uniform(0.7, 0.9) * len(self.aquifer_region))
+        num_initial_waste = len(self.aquifer_region)
+        initial_waste_positions = np.random.choice(len(self.aquifer_region), num_initial_waste, replace=False)
+        for idx in initial_waste_positions:
+            x, y = self.aquifer_region[idx]
             self.waste.add((x, y))
             self.grid[x, y] = 2  # Represent waste with 2
 
@@ -69,20 +73,29 @@ class CleanupEnv(gym.Env):
                 agent['pos'] = (min(agent['pos'][0] + 1, self.grid_size[0] - 1), agent['pos'][1])
             elif action[i] == 4:  # Rotate left
                 agent['direction'] = (agent['direction'] - 1) % 4
-            elif action[i] == 5:  # Clean
+            elif action[i] == 5:  # Rotate right
+                agent['direction'] = (agent['direction'] + 1) % 4
+            elif action[i] == 6:  # Clean
                 if agent['pos'] in self.waste:
                     self.waste.remove(agent['pos'])
                     reward += 10
             
-            # Collect apples
+            rewards.append(reward)
+        
+        # Check if agents are in apple field and collect apples
+        for agent in self.agents:
             if agent['pos'] in self.apples:
                 self.apples.remove(agent['pos'])
-                reward += 1
-
-            rewards.append(reward)
+                rewards[self.agents.index(agent)] += 1
         
         # Update the grid
         self._update_grid()
+
+        # Update apple spawning based on the cleanliness of the aquifer
+        self._spawn_apples()
+
+        # Update apple spawning based on the cleanliness of the aquifer
+        self._spawn_waste()
 
         # Check if episode is done
         done = False  # Example: Can be based on a condition such as all apples are collected
@@ -96,6 +109,42 @@ class CleanupEnv(gym.Env):
             self.grid[x, y] = 1
         for x, y in self.waste:
             self.grid[x, y] = 2
+
+    def _spawn_apples(self):
+        # Determine the cleanliness of the aquifer
+        cleanliness = 1 - (len(self.waste) / len(self.aquifer_region))
+        
+        # Set the spawn rate proportional to cleanliness
+        spawn_rate = cleanliness
+        
+        # Spawn apples based on the spawn rate
+        if np.random.rand() < spawn_rate:
+            while True:
+                x, y = np.random.randint(5, self.grid_size[0]), np.random.randint(self.grid_size[1])
+                if (x, y) not in self.aquifer_region:
+                    self.apples.add((x, y))
+                    self.grid[x, y] = 1
+                    break
+
+    def _spawn_waste(self):
+        if not self.spawn_waste_rate:
+            # Determine the cleanliness of the aquifer
+            cleanliness = 1 - (len(self.waste) / len(self.aquifer_region))
+            
+            # Set the spawn rate proportional to cleanliness
+            spawn_rate = cleanliness
+        else:
+            spawn_rate = self.spawn_waste_rate
+        
+        # Spawn apples based on the spawn rate
+        if np.random.rand() < spawn_rate:
+            while True:
+                x, y = np.random.randint(0, 5), np.random.randint(self.grid_size[1])
+                if (x, y) in self.aquifer_region:
+                    self.waste.add((x, y))
+                    self.grid[x, y] = 2
+                    break
+
 
     def _get_observation(self):
         # Create observations for each agent
@@ -113,6 +162,10 @@ class CleanupEnv(gym.Env):
     def render(self, mode='human'):
         self.screen.fill((0, 0, 0))  # Fill screen with black
 
+        # Draw aquifer region
+        for x, y in self.aquifer_region:
+            pygame.draw.rect(self.screen, (0, 0, 139), pygame.Rect(y * 20, x * 20, 20, 20))
+        
         # Draw apples
         for x, y in self.apples:
             pygame.draw.rect(self.screen, (0, 255, 0), pygame.Rect(y * 20, x * 20, 20, 20))
