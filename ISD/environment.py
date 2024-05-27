@@ -7,7 +7,7 @@ import pygame
 class CleanupEnv(gym.Env):
     def __init__(self, spawn_waste_rate = None):
         super(CleanupEnv, self).__init__()
-        self.action_space = spaces.Discrete(7)  # left, right, up, down, rotate left, rotate right, clean
+        self.action_space = spaces.Discrete(8)  # left, right, up, down, rotate left, rotate right, clean, tag
         self.observation_space = spaces.Box(low=0, high=255, shape=(15, 15, 3), dtype=np.uint8)
         
         # Define the grid size
@@ -39,6 +39,7 @@ class CleanupEnv(gym.Env):
         for agent in self.agents:
             agent['pos'] = (np.random.randint(self.grid_size[0]), np.random.randint(self.grid_size[1]))
             agent['direction'] = np.random.randint(4)
+            agent['reward'] = 0
         
         # Initialize apples and waste
         self.apples = set()
@@ -78,8 +79,14 @@ class CleanupEnv(gym.Env):
             elif action[i] == 6:  # Clean
                 if agent['pos'] in self.waste:
                     self.waste.remove(agent['pos'])
-                    reward += 10
-            
+                    # reward += 1
+            elif action[i] == 7:  # Tag
+                reward -= 1  # Cost for tagging
+                for j, other_agent in enumerate(self.agents):
+                    if i != j and agent['pos'] == other_agent['pos']:
+                        other_agent['reward'] -= 50  # Penalty for being tagged
+
+            agent['reward'] += reward
             rewards.append(reward)
         
         # Check if agents are in apple field and collect apples
@@ -87,6 +94,7 @@ class CleanupEnv(gym.Env):
             if agent['pos'] in self.apples:
                 self.apples.remove(agent['pos'])
                 rewards[self.agents.index(agent)] += 1
+                agent['reward'] += 1
         
         # Update the grid
         self._update_grid()
@@ -94,7 +102,7 @@ class CleanupEnv(gym.Env):
         # Update apple spawning based on the cleanliness of the aquifer
         self._spawn_apples()
 
-        # Update apple spawning based on the cleanliness of the aquifer
+        # Update waste spawning based on the cleanliness of the aquifer
         self._spawn_waste()
 
         # Check if episode is done
@@ -181,7 +189,7 @@ class CleanupEnv(gym.Env):
             pygame.draw.rect(self.screen, colors[idx], pygame.Rect(y * 20, x * 20, 20, 20))
         
         pygame.display.flip()
-        self.clock.tick(10)  # Limit the frame rate to 10 FPS
+        self.clock.tick(20)  # Limit the frame rate to 10 FPS
 
     def close(self):
         pygame.quit()
