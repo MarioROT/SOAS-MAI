@@ -1,8 +1,7 @@
 import gym
 from gym import spaces
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import pygame
 
 class CleanupEnv(gym.Env):
     def __init__(self):
@@ -20,6 +19,12 @@ class CleanupEnv(gym.Env):
         self.waste = set()
         
         self.reset()
+
+        # Initialize pygame
+        pygame.init()
+        self.screen = pygame.display.set_mode((self.grid_size[1] * 20, self.grid_size[0] * 20))
+        pygame.display.set_caption("Cleanup Environment")
+        self.clock = pygame.time.Clock()
 
     def reset(self):
         # Reset the grid
@@ -106,20 +111,25 @@ class CleanupEnv(gym.Env):
         return observations
 
     def render(self, mode='human'):
-        fig, ax = plt.subplots()
-        ax.set_xlim(0, self.grid_size[1])
-        ax.set_ylim(0, self.grid_size[0])
-        
+        self.screen.fill((0, 0, 0))  # Fill screen with black
+
+        # Draw apples
         for x, y in self.apples:
-            ax.add_patch(patches.Rectangle((y, x), 1, 1, color='green'))
+            pygame.draw.rect(self.screen, (0, 255, 0), pygame.Rect(y * 20, x * 20, 20, 20))
         
+        # Draw waste
         for x, y in self.waste:
-            ax.add_patch(patches.Rectangle((y, x), 1, 1, color='brown'))
+            pygame.draw.rect(self.screen, (139, 69, 19), pygame.Rect(y * 20, x * 20, 20, 20))
         
-        colors = ['pink', 'cyan', 'purple', 'yellow', 'blue']
+        # Draw agents
+        colors = [(255, 182, 193), (0, 255, 255), (128, 0, 128), (255, 255, 0), (0, 0, 255)]
         for idx, agent in enumerate(self.agents):
             x, y = agent['pos']
-            ax.add_patch(patches.Rectangle((y, x), 1, 1, color=colors[idx]))
+            pygame.draw.rect(self.screen, colors[idx], pygame.Rect(y * 20, x * 20, 20, 20))
         
-        plt.gca().invert_yaxis()
-        plt.show()
+        pygame.display.flip()
+        self.clock.tick(10)  # Limit the frame rate to 10 FPS
+
+    def close(self):
+        pygame.quit()
+
