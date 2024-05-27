@@ -1,6 +1,8 @@
 import gym
 from gym import spaces
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 class CleanupEnv(gym.Env):
     def __init__(self):
@@ -104,9 +106,20 @@ class CleanupEnv(gym.Env):
         return observations
 
     def render(self, mode='human'):
-        # Render the environment (optional)
-        grid_display = self.grid.copy()
-        for agent in self.agents:
+        fig, ax = plt.subplots()
+        ax.set_xlim(0, self.grid_size[1])
+        ax.set_ylim(0, self.grid_size[0])
+        
+        for x, y in self.apples:
+            ax.add_patch(patches.Rectangle((y, x), 1, 1, color='green'))
+        
+        for x, y in self.waste:
+            ax.add_patch(patches.Rectangle((y, x), 1, 1, color='brown'))
+        
+        colors = ['pink', 'cyan', 'purple', 'yellow', 'blue']
+        for idx, agent in enumerate(self.agents):
             x, y = agent['pos']
-            grid_display[x, y] = 3  # Represent agents with 3
-        print(grid_display)
+            ax.add_patch(patches.Rectangle((y, x), 1, 1, color=colors[idx]))
+        
+        plt.gca().invert_yaxis()
+        plt.show()

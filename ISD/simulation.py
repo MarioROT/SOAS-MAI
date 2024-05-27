@@ -1,11 +1,11 @@
 import numpy as np
-from environment import CleanupEnv  # Assuming the environment is saved in CleanupEnv.py
+from CleanupEnv import CleanupEnv  # Assuming the environment is saved in CleanupEnv.py
 
 # Initialize the environment
 env = CleanupEnv()
 
 # Number of episodes to simulate
-num_episodes = 50
+num_episodes = 5
 
 # Simulate multiple episodes
 for episode in range(num_episodes):
