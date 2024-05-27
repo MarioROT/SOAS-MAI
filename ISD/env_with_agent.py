@@ -72,9 +72,9 @@ class CleanupEnvWithAgent(CleanupEnv):
         observation = observation.transpose((2, 0, 1))  # Convert to (C, H, W) format
 
         observation = torch.tensor(observation, dtype=torch.float32).unsqueeze(0)
-        last_action = torch.tensor(last_action, dtype=torch.float32).unsqueeze(0)
-        last_extrinsic_reward = torch.tensor(last_extrinsic_reward, dtype=torch.float32).unsqueeze(0)
-        last_intrinsic_reward = torch.tensor(last_intrinsic_reward, dtype=torch.float32).unsqueeze(0)
+        last_action = torch.tensor([last_action], dtype=torch.float32).view(1, -1)
+        last_extrinsic_reward = torch.tensor([last_extrinsic_reward], dtype=torch.float32).view(1, -1)
+        last_intrinsic_reward = torch.tensor([last_intrinsic_reward], dtype=torch.float32).view(1, -1)
 
         policy, value_extrinsic, value_intrinsic, self.hx, self.cx = self.agent(
             observation, last_action, last_extrinsic_reward, last_intrinsic_reward, self.hx, self.cx
