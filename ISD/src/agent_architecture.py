@@ -25,6 +25,53 @@ class AgentNetwork(nn.Module):
         self.W = nn.Linear(32, 2, bias=True)  # First layer with 2 output nodes
         self.v = nn.Parameter(torch.randn(2))  # Weight vector for the second layer
 
+    # def forward(self, x, last_action, last_extrinsic_reward, last_intrinsic_reward, hx, cx):
+    # def forward(self, x, hx, cx):
+    #     # Visual encoder
+    #     x = F.relu(self.conv(x))
+    #     x = x.view(x.size(0), -1)  # Flatten
+    #     x = F.relu(self.fc1(x))
+    #     x_features = F.relu(self.fc2(x))
+
+    #     # Ensure last_action, last_extrinsic_reward, and last_intrinsic_reward are 2D tensors
+    #     last_action = last_action.view(-1, 1)
+    #     last_extrinsic_reward = last_extrinsic_reward.view(-1, 1)
+    #     last_intrinsic_reward = last_intrinsic_reward.view(-1, 1)
+
+    #     # Combine with last action and rewards
+    #     lstm_input = torch.cat([x_features, last_action, last_extrinsic_reward, last_intrinsic_reward], dim=1)
+
+    #     # LSTM
+    #     hx, cx = self.lstm(lstm_input, (hx, cx))
+
+    #     # Value heads
+    #     value_extrinsic = self.value_head_extrinsic(hx)
+    #     value_intrinsic = self.value_head_intrinsic(hx)
+
+    #     # Policy head
+    #     policy = self.policy_head(hx)
+
+    #     # return policy, value_extrinsic, value_intrinsic, hx, cx
+    #     return policy, hx, cx
+    # def forward(self, x, hx, cx):
+    #     # Visual encoder
+    #     x = F.relu(self.conv(x))
+    #     x = x.view(x.size(0), -1)  # Flatten
+    #     x = F.relu(self.fc1(x))
+    #     x_features = F.relu(self.fc2(x))
+
+    #     # LSTM
+    #     hx, cx = self.lstm(x_features, (hx, cx))
+
+    #     # Value heads
+    #     value_extrinsic = self.value_head_extrinsic(hx)
+    #     value_intrinsic = self.value_head_intrinsic(hx)
+
+    #     # Policy head
+    #     policy = self.policy_head(hx)
+
+    #     return policy, hx, cx
+
     def forward(self, x, last_action, last_extrinsic_reward, last_intrinsic_reward, hx, cx):
         # Visual encoder
         x = F.relu(self.conv(x))
@@ -50,7 +97,7 @@ class AgentNetwork(nn.Module):
         # Policy head
         policy = self.policy_head(hx)
 
-        return policy, value_extrinsic, value_intrinsic, hx, cx
+        return policy, hx, cx
 
     def get_intrinsic_reward(self, x):
         # Ensure input has 3 channels
