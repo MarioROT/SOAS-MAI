@@ -1,4 +1,4 @@
-Self-Organizing Multi-Agent Systems - Cleanup Game
+# Self-Organizing Multi-Agent Systems - Cleanup Game
 This repository contains the implementation of a self-organizing multi-agent system designed to study cooperative behaviors and decision-making strategies in the Cleanup game environment that makes agents face an intertemporal social dilemma scenario.
 
 To set up the environment and install the necessary dependencies, follow these steps:
